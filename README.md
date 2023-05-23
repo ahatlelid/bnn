@@ -1,2 +1,2 @@
-# bnn
-More text
+# bayesian-neural-nets
+Bayesian Neural Networks
