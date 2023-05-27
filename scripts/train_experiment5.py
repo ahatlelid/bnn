@@ -46,6 +46,7 @@ if __name__ == "__main__":
     tensor_mu_eps = tensor_mu_m 
 
     data = Data(tensor_mu_m, tensor_Sigma_m, tensor_mu_eps, tensor_Sigma_eps)
+    # test
 
 
     number_of_data = 100_000
