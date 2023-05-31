@@ -101,7 +101,7 @@ if __name__ == "__main__":
     n_param = 10
     n_data = 1000
 
-    n_batch_runs = 1000    0
+    n_batch_runs = 1000
 
     size = 100
     #total_runs = len(lr_list)*100

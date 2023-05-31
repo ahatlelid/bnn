@@ -58,8 +58,8 @@ if __name__ == "__main__":
 
     lr_initial = 0.1
     lr_start = 0.001
-    lr_minimum = 0.0001 
-    lr_steps = 10
+    lr_minimum = 0.00001 
+    lr_steps = 300
     lr_list = np.array([0.1, 0.01])
     lr_list = np.append(lr_list, np.linspace(lr_start, lr_minimum, lr_steps))
     lr_counter = 0
@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
 
     # clean folder if it exists
-    path_to_output_folder = '../saved_models/model3/1/'
+    path_to_output_folder = '../saved_models/model_infinite/2/'
     if os.path.exists(path_to_output_folder) and os.path.isdir(path_to_output_folder):
         shutil.rmtree(path_to_output_folder)
     os.makedirs(path_to_output_folder)
@@ -94,7 +94,7 @@ if __name__ == "__main__":
 
     data_fit_coefficient = 1./sigma2
     data_reg_coefficient = 1
-    prior_coefficient = 1./tau2
+    prior_coefficient = 1./tau2*0
     loss = Loss(tensor_Q_m, data_fit_coefficient, data_reg_coefficient, prior_coefficient)
 
 
@@ -142,6 +142,14 @@ if __name__ == "__main__":
         #if j % 100 == 0 and j != 0:  # change learning rate after 10*n_batches*batch_size observations
         if j % 10 == 0 and j != 0:  # change learning rate after 10*n_batches*batch_size observations
             # set new learning rate
+            #print(lr_counter)
+            #print(len(lr_list))
+            #if lr_counter < len(lr_list):
+            #    for param in optimizer.param_groups:
+            #        param['lr'] = lr_list[lr_counter] 
+            #    if lr_counter < len(lr_list) - 1:
+            #        lr_counter += 1
+            #        print('new lr')
             for param in optimizer.param_groups:
                 param['lr'] = lr_list[lr_counter] 
             lr_counter += 1

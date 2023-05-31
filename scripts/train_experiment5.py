@@ -66,11 +66,11 @@ if __name__ == "__main__":
     n_batches = 1000 # run n_batches before printing error. The error is averages across n_batches. Number of observation for each print is n_batches*batch_size
     batch_size = 1000
 
-    tensor_batch = torch.load('../data/1.0e+05/data/data.pt')
+    tensor_batch = torch.load('../data/1.0e+04/data/data.pt')
 
     data_fit_coefficient = 1./0.01
     data_reg_coefficient = 1
-    prior_coefficient = 1./0.09/100 # 
+    prior_coefficient = 1./0.09/10 # 
 
     #run_types = ['map', 'pos', 'neg']
     #run_types = ['neg']
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     for run_type in run_types:
 
         # clean folder if it exists
-        path_to_output_folder = '../saved_models/rml_100/' + run_type + '/'
+        path_to_output_folder = '../saved_models/rml_100_1.0e+04/' + run_type + '/'
         if os.path.exists(path_to_output_folder) and os.path.isdir(path_to_output_folder):
             shutil.rmtree(path_to_output_folder)
         os.makedirs(path_to_output_folder)
@@ -103,8 +103,8 @@ if __name__ == "__main__":
             lr_counter = 0
 
             if run_type == 'pos':
-                data_noise = torch.load(f'../data/1.0e+05/rml_noise/{run}/noise_data.pt')
-                data_reg_noise = torch.load(f'../data/1.0e+05/rml_noise/{run}/noise_data_regularization.pt')
+                data_noise = torch.load(f'../data/1.0e+04/rml_noise/{run}/noise_data.pt')
+                data_reg_noise = torch.load(f'../data/1.0e+04/rml_noise/{run}/noise_data_regularization.pt')
                 tensor_batch[:,:n_param] += data_noise*tensor_batch[:,n_param:]
                 loss.add_gaussian_noise(sign='positive', num=run)
             if run_type == 'neg':
@@ -115,16 +115,17 @@ if __name__ == "__main__":
 
 
             
-            size = 100
+            size = 1000
+            # use size 1000 for n=10_000 and size 100 for n=100_000
             #total_runs = len(lr_list)*100
-            total_runs = len(lr_list)*size
+            total_runs = len(lr_list)*1000
             for j in range(total_runs):
                 #losses = torch.zeros(100, 4)
                 losses = torch.zeros(size, 4)
                 idx = torch.randperm(tensor_batch.size(0))
                 tensor_batch = tensor_batch[idx,:]
                 data_reg_noise = data_reg_noise[idx,:]
-                for i in range(100):
+                for i in range(10):
                 #for i in range(10):
                     tensor_batch_ = tensor_batch[batch_size*i:batch_size*(i+1)]
                     data_reg_noise_ = data_reg_noise[batch_size*i:batch_size*(i+1)] 
@@ -141,12 +142,12 @@ if __name__ == "__main__":
                     optimizer.step()
 
                 # print info after n_batches*batch_size
-                if j % 10 == 0:
+                if j % 100 == 0:
                     #print(f"Run: {run:3} | Epoch: {j:3} | lr: {lr_list[lr_counter]:10.7f} | total loss: {torch.mean(losses[:,0]):10.5f} | likelihood: {torch.mean(losses[:,1]):10.5f} | prior: {torch.mean(losses[:,2]):10.5f} | regularization: {torch.mean(losses[:,3]):12.10f}")
                     print(f"Run: {run:3} | Epoch: {j:3} | lr: {lr_list[lr_counter]:10.7f} | {torch.mean(losses[:,0]):10.3f} {torch.mean(losses[:,1])*data_fit_coefficient:10.3f} {torch.mean(losses[:,2])*data_reg_coefficient:10.3f} {torch.mean(losses[:,3])*prior_coefficient:12.3f} | {torch.mean(losses[:,1])+torch.mean(losses[:,2])+torch.mean(losses[:,3]):10.3f} {torch.mean(losses[:,1]):10.3f} {torch.mean(losses[:,2]):10.3f} {torch.mean(losses[:,3]):10.3f}")
 
                 #if j % 100 == 0 and j != 0:  # change learning rate after 10*n_batches*batch_size observations
-                if j % size == 0 and j != 0:  # change learning rate after 10*n_batches*batch_size observations
+                if j % 1000 == 0 and j != 0:  # change learning rate after 10*n_batches*batch_size observations
                     # set new learning rate
                     for param in optimizer.param_groups:
                         param['lr'] = lr_list[lr_counter] 
