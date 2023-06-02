@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
 
     # clean folder if it exists
-    path_to_output_folder = '../saved_models/model_infinite/2/'
+    path_to_output_folder = '../saved_models/model_infinite/4_reg_10/'
     if os.path.exists(path_to_output_folder) and os.path.isdir(path_to_output_folder):
         shutil.rmtree(path_to_output_folder)
     os.makedirs(path_to_output_folder)
@@ -94,7 +94,8 @@ if __name__ == "__main__":
 
     data_fit_coefficient = 1./sigma2
     data_reg_coefficient = 1
-    prior_coefficient = 1./tau2*0
+    #prior_coefficient = 1./tau2*0
+    prior_coefficient = 1./tau2/100
     loss = Loss(tensor_Q_m, data_fit_coefficient, data_reg_coefficient, prior_coefficient)
 
 

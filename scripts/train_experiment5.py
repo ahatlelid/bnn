@@ -106,7 +106,7 @@ if __name__ == "__main__":
                 data_noise = torch.load(f'../data/1.0e+04/rml_noise/{run}/noise_data.pt')
                 data_reg_noise = torch.load(f'../data/1.0e+04/rml_noise/{run}/noise_data_regularization.pt')
                 tensor_batch[:,:n_param] += data_noise*tensor_batch[:,n_param:]
-                loss.add_gaussian_noise(sign='positive', num=run)
+                loss.add_gaussian_noise(sign='positive', num=run, filename=f'../data/1.0e+05/rml_noise/{run}/noise_parameter.pt')
             if run_type == 'neg':
                 data_noise = torch.load(f'../data/rml/{run}/noise_data_{run}.pt')
                 data_noise *= -1
