@@ -48,7 +48,7 @@ if __name__ == "__main__":
     #data = Data(tensor_mu_m, tensor_Sigma_m, tensor_mu_eps, tensor_Sigma_eps)
 
 
-    number_of_data = 10000
+    #number_of_data = 10000
     #lambda_ = 0.5
     #lambda2 = lambda_**2
     #l2_lambda =  1./(number_of_data*lambda2) 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     # if not using the cutom scheduler, this is a list of all the lrs to be used
     #lr_list = np.array([0.1, 0.01, 0.001])
     #lr_list = np.append(lr_list, np.linspace(0.001, 0.0001, 10))
-    
+
     lr_initial = 0.1
     lr_start = 0.001
     lr_minimum = 0.00001 
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     n_batches = 1000 # run n_batches before printing error. The error is averages across n_batches. Number of observation for each print is n_batches*batch_size
     batch_size = 1000
 
-    tensor_batch = torch.load('../data/1.0e+06/data/data.pt')
+    tensor_batch = torch.load('../data/1.0e+05/data/data.pt')
 
     data_fit_coefficient = 1./0.01
     data_reg_coefficient = 1
@@ -82,22 +82,21 @@ if __name__ == "__main__":
 
     #run_types = ['map', 'pos', 'neg']
     #run_types = ['neg']
-    #run_types = ['pos']
-    run_types = ['map']
-    #run_type = 'pos'
+    run_types = ['pos']
+    #run_types = ['map']
     #run_type = 'neg'
 
 
     for run_type in run_types:
 
         # clean folder if it exists
-        path_to_output_folder = '../saved_models/finite_long_e6_100/' + run_type + '/'
+        path_to_output_folder = '../saved_models/RML_long/e5/' + run_type + '/'
         if os.path.exists(path_to_output_folder) and os.path.isdir(path_to_output_folder):
             shutil.rmtree(path_to_output_folder)
         os.makedirs(path_to_output_folder)
 
 
-        runs = 1
+        runs = 100
         for run in range(runs):
             run_path = path_to_output_folder + '/' + str(run)
             os.makedirs(run_path)
@@ -112,8 +111,8 @@ if __name__ == "__main__":
             lr_counter = 0
 
             if run_type == 'pos':
-                data_noise = torch.load(f'../data/1.0e+04/rml_noise/{run}/noise_data.pt')
-                data_reg_noise = torch.load(f'../data/1.0e+04/rml_noise/{run}/noise_data_regularization.pt')
+                data_noise = torch.load(f'../data/1.0e+05/rml_noise/{run}/noise_data.pt')
+                data_reg_noise = torch.load(f'../data/1.0e+05/rml_noise/{run}/noise_data_regularization.pt')
                 tensor_batch[:,:n_param] += data_noise*tensor_batch[:,n_param:]
                 loss.add_gaussian_noise(sign='positive', num=run, filename=f'../data/1.0e+05/rml_noise/{run}/noise_parameter.pt')
             if run_type == 'neg':
@@ -124,17 +123,17 @@ if __name__ == "__main__":
 
 
             
-            size = 1000
+            #size = 1000
             # use size 1000 for n=10_000 and size 100 for n=100_000
             #total_runs = len(lr_list)*100
             total_runs = len(lr_list)*1000
             for j in range(total_runs):
                 #losses = torch.zeros(100, 4)
-                losses = torch.zeros(1000, 4)
+                losses = torch.zeros(10, 4)
                 idx = torch.randperm(tensor_batch.size(0))
                 tensor_batch = tensor_batch[idx,:]
                 #data_reg_noise = data_reg_noise[idx,:]
-                for i in range(1000):
+                for i in range(10):
                 #for i in range(10):
                     tensor_batch_ = tensor_batch[batch_size*i:batch_size*(i+1)]
                     #data_reg_noise_ = data_reg_noise[batch_size*i:batch_size*(i+1)] 
@@ -151,31 +150,16 @@ if __name__ == "__main__":
                     optimizer.step()
 
                 # print info after n_batches*batch_size
-                if j % 1 == 0:
+                if j % 100 == 0:
                     #print(f"Run: {run:3} | Epoch: {j:3} | lr: {lr_list[lr_counter]:10.7f} | total loss: {torch.mean(losses[:,0]):10.5f} | likelihood: {torch.mean(losses[:,1]):10.5f} | prior: {torch.mean(losses[:,2]):10.5f} | regularization: {torch.mean(losses[:,3]):12.10f}")
                     print(f"Run: {run:3} | Epoch: {j:3} | lr: {lr_list[lr_counter]:10.7f} | {torch.mean(losses[:,0]):10.3f} {torch.mean(losses[:,1])*data_fit_coefficient:10.3f} {torch.mean(losses[:,2])*data_reg_coefficient:10.3f} {torch.mean(losses[:,3])*prior_coefficient:12.3f} | {torch.mean(losses[:,1])+torch.mean(losses[:,2])+torch.mean(losses[:,3]):10.3f} {torch.mean(losses[:,1]):10.3f} {torch.mean(losses[:,2]):10.3f} {torch.mean(losses[:,3]):10.3f}")
 
                 #if j % 100 == 0 and j != 0:  # change learning rate after 10*n_batches*batch_size observations
-                if j % 10 == 0 and j != 0:  # change learning rate after 10*n_batches*batch_size observations
+                if j % 1000 == 0 and j != 0:  # change learning rate after 10*n_batches*batch_size observations
                     # set new learning rate
                     for param in optimizer.param_groups:
                         param['lr'] = lr_list[lr_counter] 
                     lr_counter += 1
                     print('new lr')
-                #if j % 100 == 0: 
-                if j % size == 0: 
-                    # plot figure
-                    #plt.figure(random.randint(0,1e10))
-                    #obs = data.get_tensor_data(1, [2.5, 1.5, -3, -3], [1, 3, 5, 8])
-                    #out_raw = model(obs)
-                    #out = out_raw[0].detach().numpy()
-                    #post, _ = data.get_tensor_posterior(obs[0])
-                    #plt.plot(range(10), post, 'b')
-                    #plt.plot(range(10), out, 'r')
-                    #plt.plot([1, 3, 5, 8], [2.5, 1.5, -3, -3], 'go')
-                    #plt.legend(['posterior', 'estimate', 'points'])
-                    #plt.title(f"Neural net estimate vs analytical (tau2={tau2})")
-                    #plt.savefig(run_path + '/plot.pdf')
-                    continue
                 torch.save(model.state_dict(), model_weight_name)
             print('============= new run =============')

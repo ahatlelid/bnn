@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
     data_fit_coefficient = 1./0.01
     data_reg_coefficient = 1
-    prior_coefficient = 0*1./0.09/10 # 
+    prior_coefficient = 1./0.09/100 # 
 
     #run_types = ['map', 'pos', 'neg']
     #run_types = ['neg']
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     for run_type in run_types:
 
         # clean folder if it exists
-        path_to_output_folder = '../saved_models/finite_long_e4/' + run_type + '/'
+        path_to_output_folder = '../saved_models/finite_long_e4_100/' + run_type + '/'
         if os.path.exists(path_to_output_folder) and os.path.isdir(path_to_output_folder):
             shutil.rmtree(path_to_output_folder)
         os.makedirs(path_to_output_folder)

@@ -95,7 +95,7 @@ if __name__ == "__main__":
     data_fit_coefficient = 1./sigma2
     data_reg_coefficient = 1
     #prior_coefficient = 1./tau2*0
-    prior_coefficient = 1./tau2/10
+    prior_coefficient = 1./tau2/100
     loss = Loss(tensor_Q_m, data_fit_coefficient, data_reg_coefficient, prior_coefficient)
 
 
