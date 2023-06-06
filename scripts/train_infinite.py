@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
 
     # clean folder if it exists
-    path_to_output_folder = '../saved_models/model_infinite/4_reg_10/'
+    path_to_output_folder = '../saved_models/models_infinite_data/MAP_inf_prior_10/'
     if os.path.exists(path_to_output_folder) and os.path.isdir(path_to_output_folder):
         shutil.rmtree(path_to_output_folder)
     os.makedirs(path_to_output_folder)

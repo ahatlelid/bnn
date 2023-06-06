@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     #run_types = ['map', 'pos', 'neg']
     #run_types = ['neg']
-    run_types = ['pos']
+    #run_types = ['pos']
     #run_types = ['map']
     #run_type = 'neg'
 
