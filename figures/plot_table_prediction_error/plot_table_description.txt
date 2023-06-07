@@ -1,3 +1,5 @@
+
+
 Model           | N train data | Regularization | Comment                            |
 --------------------------------------------------------------------------------------
 ML-inf          | Infinite     | None           | Maximum likelihood model           |
@@ -10,10 +12,10 @@ RML-e5-n        | 10^5         | L_2 (RML)      | RML model number n with 10^5 d
 --------------------------------------------------------------------------------------
 Statistic       |              |                | Comment                            |
 --------------------------------------------------------------------------------------
-RML-e4-mean     |              |                | Mean of RML-e4-1 to RML-e4-100     |
-RML-e4-median   |              |                | Median of RML-e4-1 to RML-e4-100   |
-RML-e5-mean     |              |                | Mean of RML-e5-1 to RML-e5-100     |
-RML-e5-median   |              |                | Median of RML-e5-1 to RML-e5-100   |
-RML-e4-var      |              |                | Variance of RML-e4-1 to RML-e4-100 |
-RML-e5-var      |              |                | Variance of RML-e5-1 to RML-e5-100 |
+RML-e4-mean     |              |                | Mean of RML-e4-1 to RML-e4-25      |
+RML-e4-median   |              |                | Median of RML-e4-1 to RML-e4-25    |
+RML-e5-mean     |              |                | Mean of RML-e5-1 to RML-e5-25      |
+RML-e5-median   |              |                | Median of RML-e5-1 to RML-e5-25    |
+RML-e4-var      |              |                | Variance of RML-e4-1 to RML-e4-25  |
+RML-e5-var      |              |                | Variance of RML-e5-1 to RML-e5-25  |
 --------------------------------------------------------------------------------------
