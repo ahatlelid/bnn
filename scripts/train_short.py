@@ -80,8 +80,8 @@ if __name__ == "__main__":
 
         # clean folder if it exists
         path_to_output_folder = '../saved_models/bnn_test/' + run_type + '/'
-        if os.path.exists(path_to_output_folder) and os.path.isdir(path_to_output_folder):
-            shutil.rmtree(path_to_output_folder)
+        #if os.path.exists(path_to_output_folder) and os.path.isdir(path_to_output_folder):
+        #    shutil.rmtree(path_to_output_folder)
         os.makedirs(path_to_output_folder)
 
 
