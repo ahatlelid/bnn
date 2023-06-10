@@ -18,7 +18,7 @@ if __name__ == "__main__":
     """Method that trains the neural net."""
 
     #size = 4
-    size = 4
+    size = 5
     print(size)
     #exit()
 
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     lr_list = np.append(lr_list, np.linspace(lr_start, lr_minimum, lr_steps))
     lr_counter = 0
 
-    #lr_list = np.array([0.1, 0.01, 0.001, 0.0001, 0.00001]) # to run short when testing
+    lr_list = np.array([0.1, 0.01, 0.001, 0.0001, 0.00001]) # to run short when testing
 
     tensor_batch = torch.load(data_file_path)
 

@@ -13,7 +13,7 @@ class Loss():
         self.counter = 0
 
 
-    def add_gaussian_noise(self, noise_variance=None, model=None, sign='positive', num=0, filename=None):
+    def add_gaussian_noise(self, filename):
         self.tensor_parameter_noise = torch.load(filename)
 
 

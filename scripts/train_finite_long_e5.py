@@ -124,10 +124,10 @@ if __name__ == "__main__":
 
 
             
-            size = 1000
+            #size = 1000
             # use size 1000 for n=10_000 and size 100 for n=100_000
             #total_runs = len(lr_list)*100
-            total_runs = len(lr_list)*1000
+            total_runs = len(lr_list)*100
             for j in range(total_runs):
                 #losses = torch.zeros(100, 4)
                 losses = torch.zeros(100, 4)
@@ -163,7 +163,7 @@ if __name__ == "__main__":
                     lr_counter += 1
                     print('new lr')
                 #if j % 100 == 0: 
-                if j % size == 0: 
+                if j % 100 == 0: 
                     # plot figure
                     #plt.figure(random.randint(0,1e10))
                     #obs = data.get_tensor_data(1, [2.5, 1.5, -3, -3], [1, 3, 5, 8])
