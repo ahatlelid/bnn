@@ -6,7 +6,6 @@ ML-inf          | Infinite     | None           | Maximum likelihood model      
 MAP-inf         | Infinite     | L_2            | Model with L_2 regularization      |
 MAP-e4          | 10^4         | L_2            | L_2 reg. trained with 10^4 data    |
 MAP-e5          | 10^5         | L_2            | L_2 reg. trained with 10^5 data    |
-MAP-e6          | 10^6         | L_2            | L_2 reg. trained with 10^6 data    |
 RML-e4-n        | 10^4         | L_2 (RML)      | RML model number n with 10^4 data  |
 RML-e5-n        | 10^5         | L_2 (RML)      | RML model number n with 10^5 data  |
 --------------------------------------------------------------------------------------
@@ -16,6 +15,4 @@ RML-e4-mean     |              |                | Mean of RML-e4-1 to RML-e4-25 
 RML-e4-median   |              |                | Median of RML-e4-1 to RML-e4-25    |
 RML-e5-mean     |              |                | Mean of RML-e5-1 to RML-e5-25      |
 RML-e5-median   |              |                | Median of RML-e5-1 to RML-e5-25    |
-RML-e4-var      |              |                | Variance of RML-e4-1 to RML-e4-25  |
-RML-e5-var      |              |                | Variance of RML-e5-1 to RML-e5-25  |
 --------------------------------------------------------------------------------------
