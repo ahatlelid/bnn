@@ -40,7 +40,7 @@ if __name__ == "__main__":
     data_file_path = f'../data/@/1.0e+0{size}/data/data.pt'
     #noise_path = f'../data/@/1.0e+0{size}/rml_noise/'
     #save_path = '../saved_models/@/rml/long/e4/'
-    save_path = f'../saved_models/testing/map/long/e{size}/'
+    save_path = f'../saved_models/testing/map2/long/e{size}/'
 
     # create lr list
     lr_initial = 0.1
@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
 
 
-    run_list = [0]
+    run_list = list(range(5))
     #run_list = list(reversed(range(0, 100)))
     for run in run_list:
         save_path_run = f'{save_path}{run}/'
