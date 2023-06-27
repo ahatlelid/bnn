@@ -40,7 +40,7 @@ if __name__ == "__main__":
     data_file_path = f'../data/@/1.0e+0{size}/data/data.pt'
     noise_path = f'../data/@/1.0e+0{size}/rml_noise/'
     #save_path = '../saved_models/@/rml/long/e4/'
-    save_path = f'../saved_models/testing2/rml/long/e{size}/'
+    save_path = f'../saved_models/testing/rml/long/e{size}/'
 
     # create lr list
     lr_initial = 0.1

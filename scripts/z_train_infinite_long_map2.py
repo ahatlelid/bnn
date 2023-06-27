@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     total_runs = len(lr_list)*100
 
-    path_to_output_folder = '../saved_models/testing2/inf2/map/'
+    path_to_output_folder = '../saved_models/testing/inf2/map/'
 
 
     model = Net_mask() 
